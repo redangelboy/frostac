@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { Phone, MapPin, Facebook, Instagram, Twitter, Mail } from "lucide-react"
+import { Phone, MapPin, Mail } from "lucide-react"
+import SocialLinksLuxury from "@/components/social-links-luxury"
 
 const FROST_LOGO = "/images/frost-logo.webp"
 
@@ -83,41 +84,7 @@ export default function SiteFooter() {
                 <Mail size={14} />
                 info@frostac.com
               </a>
-            </div>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-3 mt-6">
-              {[
-                { icon: Facebook, label: "Facebook" },
-                { icon: Instagram, label: "Instagram" },
-                { icon: Twitter, label: "Twitter/X" },
-              ].map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5"
-                  style={{
-                    backgroundColor: "rgba(255,255,255,0.08)",
-                    color: "rgba(255,255,255,0.6)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement
-                    el.style.backgroundColor = "rgba(232,99,10,0.2)"
-                    el.style.color = "var(--orange)"
-                    el.style.borderColor = "var(--orange)"
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement
-                    el.style.backgroundColor = "rgba(255,255,255,0.08)"
-                    el.style.color = "rgba(255,255,255,0.6)"
-                    el.style.borderColor = "rgba(255,255,255,0.1)"
-                  }}
-                >
-                  <Icon size={15} />
-                </a>
-              ))}
+              <SocialLinksLuxury />
             </div>
           </div>
 

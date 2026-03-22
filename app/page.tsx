@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
+import NextImage from "next/image"
+import SocialLinksLuxury from "@/components/social-links-luxury"
 import {
   Phone, Menu, X, ChevronRight, Star, CheckCircle, Shield,
   Clock, Award, Zap, Wind, Settings, Home,
@@ -221,7 +222,8 @@ export default function FrostHomePage() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener("scroll", onScroll)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
@@ -300,19 +302,40 @@ export default function FrostHomePage() {
             </span>
           </div>
         )}
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
-          {/* Logo */}
-          <a href="#" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }} aria-label="Frost Heating & Air home">
-            <Image
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: scrolled ? 68 : 92,
+            transition: "height 0.35s ease",
+          }}
+        >
+          {/* Logo: grande con scroll arriba (scrollY ≤ 40); pequeño al bajar */}
+          <a href="#" style={{ display: "flex", alignItems: "center", gap: scrolled ? 10 : 14, textDecoration: "none" }} aria-label="Frost Heating & Air home">
+            <NextImage
               src={FROST_LOGO}
               alt="Frost Heating & Air"
-              width={220}
-              height={48}
+              width={320}
+              height={72}
               priority
-              className="h-11 w-auto max-w-[min(220px,52vw)] object-contain object-left"
+              className="object-contain object-left transition-all duration-300 ease-out"
+              sizes="(max-width: 768px) 70vw, 320px"
+              style={{
+                width: "auto",
+                /* No usar height:auto: anula el tamaño; scrolled=true = ya bajó el scroll = logo compacto */
+                height: scrolled ? 36 : 56,
+                maxHeight: scrolled ? 36 : 56,
+                maxWidth: scrolled ? "min(200px, 52vw)" : "min(320px, 70vw)",
+              }}
             />
-            <div className="mobile-hide" style={{ lineHeight: 1.15 }}>
-              <div style={{ fontSize: 11, color: "#E8630A", fontWeight: 500, letterSpacing: 1 }}>EST. 1994 · LEWISVILLE, TX</div>
+            <div className="mobile-hide" style={{ lineHeight: 1.15, opacity: scrolled ? 0.92 : 1, transition: "opacity 0.25s ease" }}>
+              <div style={{ fontSize: scrolled ? 10 : 11, color: "#E8630A", fontWeight: 500, letterSpacing: 1, transition: "font-size 0.25s ease" }}>
+                EST. 1994 · LEWISVILLE, TX
+              </div>
             </div>
           </a>
 
@@ -648,7 +671,7 @@ export default function FrostHomePage() {
             {[...BRAND_LOGOS, ...BRAND_LOGOS].map((brand, i) => (
               <div key={`${brand.name}-${i}`}
                 style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 180, height: 80, margin: "0 8px", background: "#fff", border: "1px solid rgba(10,37,64,.08)", borderRadius: 10, padding: "12px 20px" }}>
-                <Image
+                <NextImage
                   src={brand.logo}
                   alt={brand.name}
                   width={160}
@@ -787,7 +810,7 @@ export default function FrostHomePage() {
             {/* Brand */}
             <div>
               <div style={{ marginBottom: 16 }}>
-                <Image
+                <NextImage
                   src={FROST_LOGO}
                   alt="Frost Heating & Air"
                   width={200}
@@ -840,6 +863,7 @@ export default function FrostHomePage() {
                   <Clock size={15} color="#2196F3" />
                   <span style={{ color: "#2196F3", fontSize: 14, fontWeight: 600 }}>24/7/365 Emergency Available</span>
                 </div>
+                <SocialLinksLuxury />
               </div>
             </div>
           </div>
@@ -883,7 +907,7 @@ export default function FrostHomePage() {
             <div style={{ background: "#0A2540", padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, overflow: "hidden", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", padding: 4, flexShrink: 0 }}>
-                  <Image src={FROST_LOGO} alt="" width={72} height={32} className="h-8 w-auto max-w-[72px] object-contain" />
+                  <NextImage src={FROST_LOGO} alt="" width={72} height={32} className="h-8 w-auto max-w-[72px] object-contain" />
                 </div>
                 <div>
                   <div style={{ fontWeight: 700, color: "#fff", fontSize: 15 }}>Frost AI Assistant</div>
