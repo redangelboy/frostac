@@ -1,18 +1,19 @@
+import Image from "next/image"
+
+/** Logos served from `public/images/companyLogos` (source files live in `images/companyLogos`). */
 const brands = [
-  { name: "Trane", tagline: "It's Hard to Stop a Trane" },
-  { name: "Carrier", tagline: "Turn to the Experts" },
-  { name: "Bryant", tagline: "Perfect Air" },
-  { name: "Lennox", tagline: "Innovation Never Felt So Good" },
-  { name: "York", tagline: "Built for More" },
-  { name: "Goodman", tagline: "Dependable Quality" },
-  { name: "American Standard", tagline: "Always Comfortable" },
-  { name: "Aprilaire", tagline: "Healthy Air Experts" },
-  { name: "Johns Manville", tagline: "Premium Insulation" },
-  { name: "Owens Corning", tagline: "Superior Insulation" },
+  { name: "Owens Corning", logo: "/images/companyLogos/owens-corning.webp" },
+  { name: "Trane", logo: "/images/companyLogos/trane.webp" },
+  { name: "Carrier", logo: "/images/companyLogos/carrier.webp" },
+  { name: "Bryant", logo: "/images/companyLogos/bryant.webp" },
+  { name: "Lennox", logo: "/images/companyLogos/lennox.webp" },
+  { name: "York", logo: "/images/companyLogos/york.webp" },
+  { name: "Goodman", logo: "/images/companyLogos/goodman.webp" },
+  { name: "American Standard", logo: "/images/companyLogos/american-standard.webp" },
+  { name: "Johns Manville", logo: "/images/companyLogos/johns-manville.webp" },
 ]
 
 export default function BrandPartners() {
-  // Duplicate for seamless marquee loop
   const doubled = [...brands, ...brands]
 
   return (
@@ -38,14 +39,11 @@ export default function BrandPartners() {
         </div>
       </div>
 
-      {/* Marquee strip */}
       <div className="relative overflow-hidden">
-        {/* Left fade */}
         <div
           className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
           style={{ background: "linear-gradient(to right, var(--light-bg), transparent)" }}
         />
-        {/* Right fade */}
         <div
           className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
           style={{ background: "linear-gradient(to left, var(--light-bg), transparent)" }}
@@ -55,19 +53,22 @@ export default function BrandPartners() {
           {doubled.map((brand, i) => (
             <div
               key={`${brand.name}-${i}`}
-              className="flex-shrink-0 flex flex-col items-center justify-center mx-4 px-8 py-5 rounded-2xl transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+              className="flex-shrink-0 flex items-center justify-center mx-4 px-6 py-6 rounded-2xl transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
               style={{
                 backgroundColor: "var(--white)",
                 border: "1.5px solid var(--light-bg-2)",
-                minWidth: "160px",
+                minWidth: "168px",
+                minHeight: "88px",
               }}
             >
-              <div className="font-extrabold text-base text-center leading-tight" style={{ color: "var(--navy)" }}>
-                {brand.name}
-              </div>
-              <div className="text-xs text-center mt-1" style={{ color: "var(--text-muted)" }}>
-                {brand.tagline}
-              </div>
+              <Image
+                src={brand.logo}
+                alt={brand.name}
+                width={160}
+                height={56}
+                className="h-12 w-auto max-w-[148px] object-contain object-center"
+                sizes="160px"
+              />
             </div>
           ))}
         </div>

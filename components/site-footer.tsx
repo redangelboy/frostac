@@ -1,4 +1,7 @@
-import { Phone, MapPin, Flame, Facebook, Instagram, Twitter, Mail } from "lucide-react"
+import Image from "next/image"
+import { Phone, MapPin, Facebook, Instagram, Twitter, Mail } from "lucide-react"
+
+const FROST_LOGO = "/images/frost-logo.webp"
 
 const footerLinks = {
   Services: [
@@ -32,18 +35,16 @@ export default function SiteFooter() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-5">
-              <div
-                className="flex items-center justify-center w-10 h-10 rounded-xl"
-                style={{ background: "linear-gradient(135deg, var(--orange), var(--orange-light))" }}
-              >
-                <Flame size={20} color="white" strokeWidth={2.5} />
-              </div>
-              <div className="leading-tight">
-                <div className="text-white font-bold text-lg leading-none tracking-tight">Frost</div>
-                <div className="text-xs font-medium tracking-widest uppercase leading-none" style={{ color: "var(--orange)" }}>
-                  Heating &amp; Air
-                </div>
+            <div className="mb-5">
+              <Image
+                src={FROST_LOGO}
+                alt="Frost Heating & Air"
+                width={200}
+                height={44}
+                className="h-10 w-auto max-w-[200px] object-contain object-left"
+              />
+              <div className="text-xs font-medium tracking-widest uppercase mt-2" style={{ color: "var(--orange)" }}>
+                Est. 1994
               </div>
             </div>
 

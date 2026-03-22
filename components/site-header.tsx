@@ -1,7 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Phone, Menu, X, Flame } from "lucide-react"
+import Image from "next/image"
+import { Phone, Menu, X } from "lucide-react"
+
+const FROST_LOGO = "/images/frost-logo.webp"
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -57,18 +60,14 @@ export default function SiteHeader() {
           <div className="flex items-center justify-between h-18 py-4">
             {/* Logo */}
             <a href="#" className="flex items-center gap-3 group" aria-label="Frost Heating & Air home">
-              <div
-                className="flex items-center justify-center w-10 h-10 rounded-xl transition-transform group-hover:scale-105"
-                style={{ background: "linear-gradient(135deg, var(--orange), var(--orange-light))" }}
-              >
-                <Flame size={20} color="white" strokeWidth={2.5} />
-              </div>
-              <div className="leading-tight">
-                <div className="text-white font-bold text-lg leading-none tracking-tight">Frost</div>
-                <div className="text-xs font-medium tracking-widest uppercase leading-none" style={{ color: "var(--orange)" }}>
-                  Heating &amp; Air
-                </div>
-              </div>
+              <Image
+                src={FROST_LOGO}
+                alt="Frost Heating & Air"
+                width={200}
+                height={44}
+                priority
+                className="h-10 sm:h-11 w-auto max-w-[min(200px,48vw)] object-contain object-left transition-transform group-hover:scale-[1.02]"
+              />
             </a>
 
             {/* Desktop nav */}

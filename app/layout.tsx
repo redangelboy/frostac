@@ -15,21 +15,8 @@ export const metadata: Metadata = {
   description: 'Frost Heating & Air has served the Dallas-Fort Worth Metroplex since 1994. NATE-certified technicians, 24/7 emergency service, AC repair, heating installation, and more.',
   keywords: 'HVAC Lewisville TX, AC repair DFW, heating installation, Frost Heating Air, air conditioning, furnace repair',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/images/frost-logo.webp', type: 'image/webp' }],
+    apple: '/images/frost-logo.webp',
   },
 }
 

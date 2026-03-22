@@ -1,7 +1,10 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { MessageSquare, X, Send, Bot, User, Sparkles } from "lucide-react"
+
+const FROST_LOGO = "/images/frost-logo.webp"
 
 interface Message {
   role: "assistant" | "user"
@@ -138,11 +141,8 @@ export default function AIChatModal() {
               style={{ background: "linear-gradient(135deg, var(--navy), var(--navy-light))" }}
             >
               <div className="flex items-center gap-3">
-                <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, var(--blue), var(--blue-light))" }}
-                >
-                  <Bot size={18} color="white" />
+                <div className="w-9 h-9 rounded-lg overflow-hidden bg-white flex items-center justify-center p-1 flex-shrink-0">
+                  <Image src={FROST_LOGO} alt="" width={64} height={28} className="h-7 w-auto max-w-[64px] object-contain" />
                 </div>
                 <div>
                   <div className="text-white font-bold text-sm">Frost AI Assistant</div>

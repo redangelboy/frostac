@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import {
   Phone, Menu, X, ChevronRight, Star, CheckCircle, Shield,
-  Clock, Award, Zap, Wind, Thermometer, Settings, Home,
+  Clock, Award, Zap, Wind, Settings, Home,
   Wrench, Leaf, MessageCircle, Send, Bot, User,
   MapPin, DollarSign, ArrowRight, BadgeCheck, Flame
 } from "lucide-react"
@@ -11,6 +12,9 @@ import {
 /* ─────────────────────────────────────────
    CONSTANTS
 ───────────────────────────────────────── */
+/** Company mark — file lives in `images/frost-logo.webp`, served from `public/images`. */
+const FROST_LOGO = "/images/frost-logo.webp"
+
 const PHONE_MAIN = "972-874-1001"
 const PHONE_AFTER = "972-816-8116"
 const ADDRESS = "320 Smith Street, Lewisville, Texas 75057"
@@ -75,9 +79,17 @@ const SERVICES = [
   },
 ]
 
-const BRANDS = [
-  "Trane", "Carrier", "Bryant", "Lennox", "York",
-  "Goodman", "American Standard", "Aprilaire", "Johns Manville", "Owens Corning",
+/** Logos in `public/images/companyLogos` (copied from `images/companyLogos`). */
+const BRAND_LOGOS = [
+  { name: "Owens Corning", logo: "/images/companyLogos/owens-corning.webp" },
+  { name: "Trane", logo: "/images/companyLogos/trane.webp" },
+  { name: "Carrier", logo: "/images/companyLogos/carrier.webp" },
+  { name: "Bryant", logo: "/images/companyLogos/bryant.webp" },
+  { name: "Lennox", logo: "/images/companyLogos/lennox.webp" },
+  { name: "York", logo: "/images/companyLogos/york.webp" },
+  { name: "Goodman", logo: "/images/companyLogos/goodman.webp" },
+  { name: "American Standard", logo: "/images/companyLogos/american-standard.webp" },
+  { name: "Johns Manville", logo: "/images/companyLogos/johns-manville.webp" },
 ]
 
 const COUNTIES = [
@@ -290,12 +302,16 @@ export default function FrostHomePage() {
         )}
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
           {/* Logo */}
-          <a href="#" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <div style={{ width: 42, height: 42, background: "linear-gradient(135deg,#2196F3,#0A2540)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Thermometer size={22} color="#fff" />
-            </div>
-            <div>
-              <div style={{ fontWeight: 800, fontSize: 18, color: "#fff", lineHeight: 1.1 }}>Frost Heating & Air</div>
+          <a href="#" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }} aria-label="Frost Heating & Air home">
+            <Image
+              src={FROST_LOGO}
+              alt="Frost Heating & Air"
+              width={220}
+              height={48}
+              priority
+              className="h-11 w-auto max-w-[min(220px,52vw)] object-contain object-left"
+            />
+            <div className="mobile-hide" style={{ lineHeight: 1.15 }}>
               <div style={{ fontSize: 11, color: "#E8630A", fontWeight: 500, letterSpacing: 1 }}>EST. 1994 · LEWISVILLE, TX</div>
             </div>
           </a>
@@ -629,10 +645,17 @@ export default function FrostHomePage() {
         </div>
         <div className="marquee-wrap" style={{ overflow: "hidden" }}>
           <div className="marquee-track" style={{ display: "flex", gap: 0, width: "max-content" }}>
-            {[...BRANDS, ...BRANDS].map((brand, i) => (
-              <div key={`${brand}-${i}`}
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 180, height: 72, margin: "0 8px", background: "#fff", border: "1px solid rgba(10,37,64,.08)", borderRadius: 10, padding: "0 24px" }}>
-                <span style={{ fontWeight: 800, fontSize: 16, color: "#0A2540", letterSpacing: .5 }}>{brand}</span>
+            {[...BRAND_LOGOS, ...BRAND_LOGOS].map((brand, i) => (
+              <div key={`${brand.name}-${i}`}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 180, height: 80, margin: "0 8px", background: "#fff", border: "1px solid rgba(10,37,64,.08)", borderRadius: 10, padding: "12px 20px" }}>
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={160}
+                  height={48}
+                  className="h-12 w-auto max-w-[148px] object-contain"
+                  sizes="160px"
+                />
               </div>
             ))}
           </div>
@@ -763,14 +786,15 @@ export default function FrostHomePage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 40, marginBottom: 48 }}>
             {/* Brand */}
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <div style={{ width: 40, height: 40, background: "linear-gradient(135deg,#2196F3,#0A2540)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Thermometer size={20} color="#fff" />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: 16, color: "#fff" }}>Frost Heating & Air</div>
-                  <div style={{ fontSize: 11, color: "#E8630A" }}>EST. 1994</div>
-                </div>
+              <div style={{ marginBottom: 16 }}>
+                <Image
+                  src={FROST_LOGO}
+                  alt="Frost Heating & Air"
+                  width={200}
+                  height={44}
+                  className="h-10 w-auto max-w-[200px] object-contain object-left"
+                />
+                <div style={{ fontSize: 11, color: "#E8630A", marginTop: 8 }}>EST. 1994</div>
               </div>
               <p style={{ color: "rgba(255,255,255,.5)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
                 Trusted HVAC services for the Dallas-Fort Worth Metroplex since 1994.
@@ -858,8 +882,8 @@ export default function FrostHomePage() {
             {/* Header */}
             <div style={{ background: "#0A2540", padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ width: 36, height: 36, background: "#E8630A", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Bot size={20} color="#fff" />
+                <div style={{ width: 40, height: 40, borderRadius: 10, overflow: "hidden", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", padding: 4, flexShrink: 0 }}>
+                  <Image src={FROST_LOGO} alt="" width={72} height={32} className="h-8 w-auto max-w-[72px] object-contain" />
                 </div>
                 <div>
                   <div style={{ fontWeight: 700, color: "#fff", fontSize: 15 }}>Frost AI Assistant</div>
